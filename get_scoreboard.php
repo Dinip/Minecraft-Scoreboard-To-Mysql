@@ -6,9 +6,9 @@ use Thedudeguy\Rcon;
 date_default_timezone_set('Europe/Lisbon');
 $time = date("Y-m-d H:i:s");
 if($rconPing = fsockopen($rconHost,$rconPort,$errCode,$errStr,$waitTimeoutInSeconds)){
-  echo "rcon successfully pinged \n";   
+  echo "rcon successfully pinged @ " . $time . " \n";   
   if($mysqlPing = fsockopen($dbHost,$dbPort,$errCode,$errStr,$waitTimeoutInSeconds)){
-    echo "mysq successfully pinged \n";
+    echo "mysq successfully pinged @ " . $time . " \n";
     fclose($rconPing);
     fclose($mysqlPing);
     $rcon = new Rcon($rconHost, $rconPort, $rconPassword, $rconTimeout);
@@ -90,13 +90,13 @@ if($rconPing = fsockopen($rconHost,$rconPort,$errCode,$errStr,$waitTimeoutInSeco
       $rcon->disconnect();
       $mysqlConnection->close();
     } else {
-      echo "rcon server not found \n";
+      echo "rcon server not found @ " . $time . " \n";
       fclose($rconPing);
     }
   } else {
-    echo "mysql server not found \n";
+    echo "mysql server not found @ " . $time . " \n";
     fclose($mysqlPing);
   }
 } else {
-  echo "rcon server not found \n";
+  echo "rcon server not found @ " . $time . " \n";
 } 
